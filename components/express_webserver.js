@@ -19,9 +19,10 @@ module.exports = function(controller, bot) {
     webserver.use(express.static('public'));
 
 
-    webserver.listen(process.env.PORT || 3000, null, function() {
+    webserver.listen(process.env.PORT || 3000,  null, function() {
 
-        debug('Express webserver configured and listening at http://localhost:' + process.env.PORT || 3000);
+        debug('Express webserver configured and listening at ',
+            process.env.HOSTNAME || 'http://localhost/' + ':' + process.env.PORT || 3000);
 
     });
 

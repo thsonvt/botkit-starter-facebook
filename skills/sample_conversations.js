@@ -25,6 +25,24 @@ module.exports = function(controller) {
         });
 
     });
+  
+  controller.hears(['^Apply for Jobs'], 'message_received', function(bot, message) {
+
+        bot.startConversation(message, function(err, convo) {
+                convo.say('Great! Let\'s start right away.');
+          
+                controller.storage.users.get(message.user, function(err, user) {
+                  if (user && user.name) {
+                      
+                      convo.ask(message, 'Are you ' + user.name + ' ?', function(response, convo){
+                        convo.next();
+                      });
+                  } 
+                });
+                convo.next();
+        });
+
+    });
 
 
     controller.hears(['question'], 'message_received', function(bot, message) {
