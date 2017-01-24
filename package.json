@@ -7,6 +7,9 @@
     "start": "node bot.js"
   },
   "dependencies": {
+    "mongodb": "^2.1.6",
+    "monk": "^2.1.0",
+    "botkit-storage-mongo": "^1.0.4",
     "body-parser": "^1.15.2",
     "botkit": "^0.4",
     "botkit-middleware-apiai": "^0.1.1",

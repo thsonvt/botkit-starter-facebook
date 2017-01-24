@@ -31,6 +31,8 @@ if (!process.env.verify_token) {
 }
 
 var Botkit = require('botkit');
+var mongoStorage = require('botkit-storage-mongo')({mongoUri: 'mongodb://admin:FRCMEWLAQBWEVZLO@bluemix-sandbox-dal-9-portal.0.dblayer.com:22323,bluemix-sandbox-dal-9-portal.4.dblayer.com:22323/admin?ssl=true'});
+
 var debug = require('debug')('botkit:main');
 var apiai = require('botkit-middleware-apiai')({
     token: process.env.apiai_token,
@@ -40,6 +42,7 @@ var apiai = require('botkit-middleware-apiai')({
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.facebookbot({
     debug: false,
+    storage: mongoStorage,
     receive_via_postback: true,
     verify_token: process.env.verify_token,
     access_token: process.env.page_token,
