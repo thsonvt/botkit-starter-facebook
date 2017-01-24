@@ -115,9 +115,13 @@ apiai
     })
     .action('Looking for Jobs', function (message, resp, bot) {
         let responseText = resp.result.fulfillment.speech;
+        console.log('resp:'+resp);
+        console.log('responseText:'+responseText);
+        console.log('message:'+message);
         bot.reply(message, "Great. Please tell me what kinds of role you are looking for");
     })
     .action('input.unknown', function (message, resp, bot) {
+        console.log(message);
         bot.reply(message, "Sorry, I don't understand");
     });
 
