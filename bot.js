@@ -101,6 +101,10 @@ apiai
         let responseText = resp.result.fulfillment.speech;
         bot.reply(message, responseText);
     })
+    .action('hello', function (message, resp, bot) {
+        let responseText = resp.result.fulfillment.speech;
+        bot.reply(message, "Hi, this is MIRA. I am here to help with job application process");
+    })
     .action('input.unknown', function (message, resp, bot) {
         bot.reply(message, "Sorry, I don't understand");
     });
