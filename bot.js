@@ -18,7 +18,6 @@ This is a sample Facebook bot built with Botkit.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-
 if (!process.env.page_token) {
     console.log('Error: Specify a Facebook page_token in environment.');
     usage_tip();
@@ -31,16 +30,14 @@ if (!process.env.verify_token) {
     process.exit(1);
 }
 
-// var Botkit = require('botkit');
-var Botkit = require('botkit'),
-    mongoStorage = require('botkit-storage-mongo')({mongoUri: 'mongodb://admin:FRCMEWLAQBWEVZLO@bluemix-sandbox-dal-9-portal.0.dblayer.com:22323,bluemix-sandbox-dal-9-portal.4.dblayer.com:22323/admin?ssl=true'});
-    
+var Botkit = require('botkit');
+var     mongoStorage = require('botkit-storage-mongo')({mongoUri: 'mongodb://admin:FRCMEWLAQBWEVZLO@bluemix-sandbox-dal-9-portal.0.dblayer.com:22323,bluemix-sandbox-dal-9-portal.4.dblayer.com:22323/admin?ssl=true'});
 
 var debug = require('debug')('botkit:main');
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.facebookbot({
-    debug: true,
+    // debug: true,
     storage: mongoStorage,
     receive_via_postback: true,
     verify_token: process.env.verify_token,

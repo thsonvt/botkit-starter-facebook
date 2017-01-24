@@ -26,23 +26,45 @@ module.exports = function(controller) {
 
     });
   
-  controller.hears(['^Apply for Jobs'], 'message_received', function(bot, message) {
+    controller.hears(['^Apply for Jobs'], 'message_received', function(bot, message) {
 
         bot.startConversation(message, function(err, convo) {
-                convo.say('Great! Let\'s start right away.');
-          
-                controller.storage.users.get(message.user, function(err, user) {
-                  if (user && user.name) {
-                      
-                      convo.ask(message, 'Are you ' + user.name + ' ?', function(response, convo){
-                        convo.next();
-                      });
-                  } 
-                });
-                convo.next();
+            convo.say('Great! Let\'s start right away. What is your name?');
+            // convo.ask(message, 'Great! Let\'s start right away. What is your name?');
+            // convo.next();
         });
-
     });
+  
+    controller.hears(['call me (.*)', 'my name is (.*)'], 'message_received', function(bot, message) {
+      var name = message.match[1];
+      controller.storage.users.get(message.user, function(err, user) {
+          if (!user) {
+              user = {
+                  id: message.user,
+              };
+          }
+          user.name = name;
+          controller.storage.users.save(user, function(err, id) {
+              bot.reply(message, 'Got it. I will call you ' + user.name + ' from now on.');
+          });
+      });
+  });
+  
+      controller.hears(['what is my name'], 'message_received', function(bot, message) {
+            var user = controller.storage.users;
+            
+            if (user && user.name) {
+                bot.reply(message, 'Your name is ' + user.name);
+            } else {
+                bot.reply(message, 'I am not sure');
+            }
+        
+      
+            // bot.reply(message, 'Your name is ' + user.name);
+            // convo.ask(message, 'Great! Let\'s start right away. What is your name?');
+            // convo.next();
+        
+  });
 
 
     controller.hears(['question'], 'message_received', function(bot, message) {
