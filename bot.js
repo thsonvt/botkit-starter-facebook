@@ -84,7 +84,7 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 // You can tie into the execution of the script using the functions
 // controller.studio.before, controller.studio.after and controller.studio.validate
 
-controller.hears('.*', ['direct_message', 'direct_mention', 'mention'], function (bot, message) {
+controller.hears('.*', ['direct_message', 'direct_mention', 'mention', 'message_received'], function (bot, message) {
     apiai.process(message, bot);
 });
 
