@@ -88,6 +88,14 @@ controller.hears('.*', ['direct_message', 'direct_mention', 'mention', 'message_
     apiai.process(message, bot);
 });
 
+controller.hears('hello', ['direct_message', 'direct_mention', 'mention', 'message_received'], function (bot, message) {
+    bot.reply(message, " controller - Hi, this is MIRA. I am here to help with job application process");
+});
+
+controller.hears('Looking for Jobs', ['direct_message', 'direct_mention', 'mention', 'message_received'], function (bot, message) {
+    bot.reply(message, " controller - Great. Please tell me what kinds of role you are looking for");
+});
+
 controller.on('reaction_added', function (bot, message) {
    console.log(message);
 });
@@ -104,6 +112,10 @@ apiai
     .action('hello', function (message, resp, bot) {
         let responseText = resp.result.fulfillment.speech;
         bot.reply(message, "Hi, this is MIRA. I am here to help with job application process");
+    })
+    .action('Looking for Jobs', function (message, resp, bot) {
+        let responseText = resp.result.fulfillment.speech;
+        bot.reply(message, "Great. Please tell me what kinds of role you are looking for");
     })
     .action('input.unknown', function (message, resp, bot) {
         bot.reply(message, "Sorry, I don't understand");
